@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/jquery-1.11.3.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -56,47 +56,49 @@
 <script src="js/President.js"></script>
 <script>
 
-    var presidents = [];
-    var randomPres;
+    (function () {
+        var presidents = [];
+        var randomPres;
 
-    //load the president list
-    loadPresidentList();
+        //load the president list
+        loadPresidentList();
 
-    //get the random president
-    getRandomPresident();
+        //get the random president
+        getRandomPresident();
 
-    //add the event listener to the buttons
-    document.getElementById('btnCheckAnswer').addEventListener('click', checkAnswer);
-    document.getElementById('btnNewPresident').addEventListener('click', getRandomPresident);
+        //add the event listener to the buttons
+        document.getElementById('btnCheckAnswer').addEventListener('click', checkAnswer);
+        document.getElementById('btnNewPresident').addEventListener('click', getRandomPresident);
 
+        function getRandomPresident() {
+            //reset the UI values to blank
+            document.getElementById('answer').value = '';
+            document.getElementById('resultText').innerHTML = '';
 
-    function getRandomPresident() {
-        //reset the UI values to blank
-        document.getElementById('answer').value = '';
-        document.getElementById('resultText').innerHTML = '';
+            //selected a random pres
+            randomPres = presidents[Math.floor(Math.random() * presidents.length)];
 
-        //selected a random pres
-        randomPres = presidents[Math.floor(Math.random() * presidents.length)];
-
-        //set the presidents name in the UI
-        document.getElementById('presName').innerHTML = randomPres.name;
-    }
-
-    function checkAnswer() {
-        var result = document.getElementById('resultText');
-        var num = document.getElementById('answer').value;
-        if (num === randomPres.number) {
-            result.innerHTML = 'you are correct';
-        } else {
-            result.innerHTML = 'whoops! that\'s incorrect...try again';
+            //set the presidents name in the UI
+            document.getElementById('presName').innerHTML = randomPres.name;
         }
-    }
 
-    function loadPresidentList() {
-        presidentsJson.forEach(function (pres) {
-            presidents.push(new President(pres));
-        });
-    }
+        function checkAnswer() {
+            var result = document.getElementById('resultText');
+            var num = document.getElementById('answer').value;
+            if (num === randomPres.number) {
+                result.innerHTML = 'you are correct';
+            } else {
+                result.innerHTML = 'whoops! that\'s incorrect...try again';
+            }
+        }
+
+        function loadPresidentList() {
+            presidentsJson.forEach(function (pres) {
+                presidents.push(new President(pres));
+            });
+        }
+
+    })();
 
 
 </script>
