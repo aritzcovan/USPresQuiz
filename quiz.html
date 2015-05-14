@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>US President quiz</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>what number president was: <span id="presName"></span></h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="answer" width="5%"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">&nbsp;</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <button id="btnCheckAnswer" class="btn btn-primary">check answer</button>
+            <button id="btnNewPresident" class="btn btn-primary">gimme a new prez</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 id="resultText"></h4>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="js/President.js"></script>
+<script>
+
+    var presidents = [];
+    var randomPres;
+
+    //load the president list
+    loadPresidentList();
+
+    //get the random president
+    getRandomPresident();
+
+    //add the event listener to the buttons
+    document.getElementById('btnCheckAnswer').addEventListener('click', checkAnswer);
+    document.getElementById('btnNewPresident').addEventListener('click', getRandomPresident);
+
+
+    function getRandomPresident() {
+        //reset the UI values to blank
+        document.getElementById('answer').value = '';
+        document.getElementById('resultText').innerHTML = '';
+
+        //selected a random pres
+        randomPres = presidents[Math.floor(Math.random() * presidents.length)];
+
+        //set the presidents name in the UI
+        document.getElementById('presName').innerHTML = randomPres.name;
+    }
+
+    function checkAnswer() {
+        var result = document.getElementById('resultText');
+        var num = document.getElementById('answer').value;
+        if (num === randomPres.number) {
+            result.innerHTML = 'you are correct';
+        } else {
+            result.innerHTML = 'whoops! that\'s incorrect...try again';
+        }
+    }
+
+    function loadPresidentList() {
+        presidentsJson.forEach(function (pres) {
+            presidents.push(new President(pres));
+        });
+    }
+
+
+</script>
+</html>
