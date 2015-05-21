@@ -3,9 +3,6 @@ var President = function(dto){
     this.number = dto.num;
 };
 
-
-
-
 //simulate a web service call to get some data
 var presidentsJson = function(){
     return [
