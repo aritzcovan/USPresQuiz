@@ -12,7 +12,7 @@ var Quiz = function($){
     $('#btnCheckAnswer').on('click', $.proxy(this.checkAnswer, this));
     $('#btnNewPresident').on('click', $.proxy(this.getRandomPresident, this));
 
-    
+
     //$('#btnCheckAnswer').on('click', this.checkAnswer.bind(this));
     //$('#btnNewPresident').on('click', this.getRandomPresident.bind(this));
 
